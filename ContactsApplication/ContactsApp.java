@@ -9,46 +9,49 @@ import java.util.*;
 
 public class ContactsApp {
 
+    static Path currentDir = Paths.get("ContactsApplication/contacts.txt");
+    static List<String> contactList;
+
+    static {
+        try {
+            contactList = Files.readAllLines(currentDir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ContactsApp() throws IOException {
+    }
+
     public static void main(String[] args) throws IOException {
+        addContact();
+    }
+    public static void addContact() throws IOException {
+
+        Scanner scan = new Scanner(System.in);
         Path currentDir = Paths.get("ContactsApplication/contacts.txt");
-        Contacts practice = new Contacts("firstName", "lastName", "1234567");
-        List<String> pract = Collections.singletonList(practice.getFirstName() + " " + practice.getLastName() + " | " + practice.getPhoneNumber());
+        System.out.println("First Name: ");
+        String userFirst = scan.nextLine();
+        System.out.println("Last Name: ");
+        String userLast = scan.nextLine();
+        System.out.println("Phone Number: ");
+        String userNumber = scan.nextLine();
 
-        Files.write(currentDir, pract);
+        Contacts contact = new Contacts(userFirst, userLast, userNumber);
+        String contactFormat = contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber();
+        contactList.add(contactFormat);
+        System.out.println(contactList);
+    }
 
+    public static void searchContact() throws IOException {
+        Scanner scan = new Scanner(System.in);
+        Path currentDir = Paths.get("ContactsApplication/contacts.txt");
+        System.out.println("Search by First or Last Name: ");
+        String userSearch = scan.nextLine();
 
+        if(userSearch.contains((CharSequence) contactList)) {
 
-
-
-
-
-
-
-
-
-
-
-//        Scanner scan = new Scanner(System.in);
-//        Path currentDir = Paths.get("ContactsApplication/contacts.txt");
-
-
-//        System.out.println("Name: ");
-//        String userName = scan.nextLine();
-//        List<String> contactName = Arrays.asList(userName);
-//        System.out.println(contactName);
-//        System.out.println("Number: ");
-//        String userNumber = scan.nextLine();
-//        List<String> contactNumber = Arrays.asList(userNumber);
-//        System.out.println(contactNumber);
-
-
-//        Files.write(currentDir, contactName);
-//        Files.write(currentDir, contactNumber, StandardOpenOption.APPEND);
-
-//        List<String> contactList = Files.readAllLines(currentDir);
-//        for(int i = 0; i < contactList.size(); i++) {
-//            System.out.println((i + 1) + ": " + contactList.get(i));
-//        }
+        }
 
     }
 

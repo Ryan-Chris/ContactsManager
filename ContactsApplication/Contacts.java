@@ -1,5 +1,10 @@
 package ContactsApplication;
 
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
+import java.util.List;
+
 public class Contacts {
     private String firstName;
     private String lastName;
@@ -33,6 +38,5 @@ public class Contacts {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
 }
