@@ -5,16 +5,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ContactsApp {
 
     public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
         Path currentDir = Paths.get("ContactsApplication/contacts.txt");
+        Contacts practice = new Contacts("firstName", "lastName", "1234567");
+        String pract = practice.getFirstName() + " " + practice.getLastName() + " | " + practice.getPhoneNumber();
+
+        Files.write(currentDir, Collections.singleton(pract));
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        Scanner scan = new Scanner(System.in);
+//        Path currentDir = Paths.get("ContactsApplication/contacts.txt");
 
 
 //        System.out.println("Name: ");
@@ -30,10 +45,10 @@ public class ContactsApp {
 //        Files.write(currentDir, contactName);
 //        Files.write(currentDir, contactNumber, StandardOpenOption.APPEND);
 
-        List<String> contactList = Files.readAllLines(currentDir);
-        for(int i = 0; i < contactList.size(); i++) {
-            System.out.println((i + 1) + ": " + contactList.get(i));
-        }
+//        List<String> contactList = Files.readAllLines(currentDir);
+//        for(int i = 0; i < contactList.size(); i++) {
+//            System.out.println((i + 1) + ": " + contactList.get(i));
+//        }
 
     }
 
