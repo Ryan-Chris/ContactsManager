@@ -12,9 +12,9 @@ public class ContactsApp {
     public static void main(String[] args) throws IOException {
         Path currentDir = Paths.get("ContactsApplication/contacts.txt");
         Contacts practice = new Contacts("firstName", "lastName", "1234567");
-        String pract = practice.getFirstName() + " " + practice.getLastName() + " | " + practice.getPhoneNumber();
+        List<String> pract = Collections.singletonList(practice.getFirstName() + " " + practice.getLastName() + " | " + practice.getPhoneNumber());
 
-        Files.write(currentDir, Collections.singleton(pract));
+        Files.write(currentDir, pract);
 
 
 
