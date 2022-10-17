@@ -29,8 +29,7 @@ public class ContactsApp {
     }
 
     public static void main(String[] args) throws IOException {
-
-
+        contactList();
 
     }
 
@@ -67,16 +66,18 @@ public class ContactsApp {
         }
     }
 
-//    public static void splitContact() throws IOException {
-//        int loneContact = 1;
-//        for(int i = 0; i < contactList.size(); i += loneContact) {
-//            subContact.add(contactList.subList(i, Math.min(i + loneContact, contactList.size())));
-//        }
-//        for(int i = 0; i < subContact.size(); i++) {
-////            singleContacts = subContact.get(i);
-//            System.out.println(subContact.get(i));
-//        }
-//    }
+    public static void mainMenu() throws IOException {
+        Scanner myScanner = new Scanner(System.in);
+        System.out.println("");
+    }
+
+    public static void contactList() throws IOException {
+        for(int i = 0; i < contactList.size(); i += 1) {
+            subContact.add(contactList.subList(i, Math.min(i + 1, contactList.size())));
+            singleContacts = contactList.subList(i, Math.min(i + 1, contactList.size())).toString();
+            System.out.println(singleContacts.replace("[", "").replace("]", ""));
+        }
+    }
 
 }
 
