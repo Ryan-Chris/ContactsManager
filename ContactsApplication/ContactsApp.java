@@ -10,11 +10,9 @@ import java.util.*;
 public class ContactsApp {
 
     static Path currentDir = Paths.get("ContactsApplication/contacts.txt");
-
     static List<String> contactList;
-
     static String singleContacts;
-
+    static List<String> contactFormat;
     static List<List<String>> subContact = new ArrayList<>();
 
     static {
@@ -30,11 +28,9 @@ public class ContactsApp {
 
     public static void main(String[] args) throws IOException {
         contactList();
-
     }
 
     public static void addContact() throws IOException {
-
         Scanner scan = new Scanner(System.in);
         System.out.println("First Name: ");
         String userFirst = scan.nextLine();
@@ -44,7 +40,7 @@ public class ContactsApp {
         String userNumber = scan.nextLine();
 
         Contacts contact = new Contacts(userFirst, userLast, userNumber);
-        List<String> contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
+        contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
         Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
         contactList.add(contactFormat.toString());
     }
@@ -54,14 +50,14 @@ public class ContactsApp {
         System.out.println("Search by First or Last Name: ");
         String userSearch = scan.nextLine();
         boolean check = false;
-        for(int i = 0; i < contactList.size(); i++) {
-            if (contactList.get(i).contains(userSearch)) {
+        for (String s : contactList) {
+            if (s.contains(userSearch)) {
                 check = true;
-                System.out.println(contactList.get(i));
+                System.out.println(s);
 //                menu method call here!!!
             }
         }
-        if(check == false) {
+        if(!check) {
             searchContact();
         }
     }
