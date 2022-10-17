@@ -110,7 +110,8 @@ public class ContactsApp {
         for(int i = 0; i < contactList.size(); i++) {
             if(contactList.get(i).contains(userDelete)) {
                 check = true;
-                List<String> tempArray = Files.readAllLines(currentDir);
+                List<String> tempArray = new ArrayList<>();
+                tempArray = Files.readAllLines(currentDir);
                 tempArray.remove(contactList.get(i));
                 Files.write(currentDir, tempArray);
                 System.out.println(contactList.get(i) + " was deleted!");
