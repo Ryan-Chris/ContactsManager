@@ -141,6 +141,7 @@ public class ContactsApp {
     }
     public static void endProgram() {
         System.out.println("Okay, Goodbye!");
+        System.exit(0);
     }
     public static void menuRecursion() throws IOException {
         Scanner scan = new Scanner(System.in);
