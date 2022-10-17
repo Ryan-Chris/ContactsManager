@@ -13,12 +13,22 @@ public class ContactsApp {
     static List<String> contactList;
     static List<List<String>> subContact = new ArrayList<>();
 
+    static {
+        try {
+            contactList = Files.readAllLines(currentDir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ContactsApp() throws IOException {
     }
 
     public static void main(String[] args) throws IOException {
+        splitContact();
         addContact();
     }
+
     public static void addContact() throws IOException {
 
         Scanner scan = new Scanner(System.in);
@@ -32,6 +42,7 @@ public class ContactsApp {
         Contacts contact = new Contacts(userFirst, userLast, userNumber);
         List<String> contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
         Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
+        contactList.add(contactFormat.toString());
     }
 
     public static void searchContact() throws IOException {
@@ -46,8 +57,8 @@ public class ContactsApp {
         for(int i = 0; i < contactList.size(); i += singleContact) {
             subContact.add(contactList.subList(i, Math.min(i + singleContact, contactList.size())));
         }
-        for(int i = 0; i < subContact.size(); i++) {
-            System.out.println(subContact.get(i));
+        for (List<String> strings : subContact) {
+            System.out.println(strings);
         }
     }
 
