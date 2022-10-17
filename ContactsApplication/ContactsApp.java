@@ -29,9 +29,9 @@ public class ContactsApp {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(contactList);
-//        addContact();
-        searchContact();
+
+
+
     }
 
     public static void addContact() throws IOException {
