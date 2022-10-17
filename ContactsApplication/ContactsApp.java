@@ -13,26 +13,15 @@ public class ContactsApp {
     static List<String> contactList;
     static List<List<String>> subContact = new ArrayList<>();
 
-    static {
-        try {
-            contactList = Files.readAllLines(currentDir);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ContactsApp() throws IOException {
     }
 
     public static void main(String[] args) throws IOException {
-//        splitContact();
         addContact();
-        splitContact();
     }
     public static void addContact() throws IOException {
 
         Scanner scan = new Scanner(System.in);
-        Path currentDir = Paths.get("ContactsApplication/contacts.txt");
         System.out.println("First Name: ");
         String userFirst = scan.nextLine();
         System.out.println("Last Name: ");
@@ -41,10 +30,8 @@ public class ContactsApp {
         String userNumber = scan.nextLine();
 
         Contacts contact = new Contacts(userFirst, userLast, userNumber);
-        String contactFormat = contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber();
-        contactList.add(contactFormat);
-//        System.out.println(contactList);
-        Files.write(currentDir, contactList, StandardOpenOption.APPEND);
+        List<String> contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
+        Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
     }
 
     public static void searchContact() throws IOException {
@@ -54,7 +41,7 @@ public class ContactsApp {
         String userSearch = scan.nextLine();
     }
 
-    public static void splitContact() throws IOException{
+    public static void splitContact() throws IOException {
         int singleContact = 1;
         for(int i = 0; i < contactList.size(); i += singleContact) {
             subContact.add(contactList.subList(i, Math.min(i + singleContact, contactList.size())));
