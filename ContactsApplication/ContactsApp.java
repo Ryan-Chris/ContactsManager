@@ -45,6 +45,13 @@ public class ContactsApp {
         Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
         contactList.add(contactFormat.toString());
         System.out.println("Contact was successfully added!");
+        System.out.println("");
+        System.out.println("Would you like to add another contact? [y/n]");
+        String userContinue = scan.nextLine();
+        if(userContinue.equalsIgnoreCase("y")) {
+            addContact();
+        }
+        menuRecursion();
     }
     public static void searchContact() throws IOException {
         Scanner scan = new Scanner(System.in);
@@ -54,9 +61,14 @@ public class ContactsApp {
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).contains(userSearch)) {
                 check = true;
-                System.out.println(contactList.get(i));
-                System.out.println("What would you like to do next?");
-                mainMenu();
+                System.out.println(contactList.get(i).replace("[", "").replace("]", ""));
+                System.out.println("");
+                System.out.println("Would you like to search for another contact? [y/n]");
+                String userContinue = scan.nextLine();
+                if(userContinue.equalsIgnoreCase("y")) {
+                    searchContact();
+                }
+                menuRecursion();
             }
         }
         if(!check) {
@@ -81,11 +93,9 @@ public class ContactsApp {
                 break;
             case 2:
                 addContact();
-                mainMenu();
                 break;
             case 3:
                 searchContact();
-                mainMenu();
                 break;
             case 4:
                 deleteContact();
@@ -107,27 +117,21 @@ public class ContactsApp {
         System.out.println("Please enter the name of the contact you would like to delete: ");
         String userDelete = scan.nextLine();
         boolean check = false;
-        for(int i = 0; i < contactList.size(); i++) {
+        for(int i = 0; i <= contactList.size(); i++) {
             if(contactList.get(i).contains(userDelete)) {
                 check = true;
-                List<String> tempArray = new ArrayList<>();
-                tempArray = Files.readAllLines(currentDir);
-                tempArray.remove(contactList.get(i));
-                Files.write(currentDir, tempArray);
+//                List<String> tempArray = new ArrayList<>();
+//                tempArray = Files.readAllLines(currentDir);
                 System.out.println(contactList.get(i) + " was deleted!");
+                contactList.remove(contactList.get(i));
+                Files.write(currentDir, contactList);
                 System.out.println("");
                 System.out.println("Would you like to delete another contact? [y/n]");
                 String continueDelete = scan.nextLine();
                 if(continueDelete.equalsIgnoreCase("y")) {
                     deleteContact();
                 }
-                System.out.println("Would you like to go back to the Main Menu? [y/n]");
-                String continueMenu = scan.nextLine();
-                if(continueMenu.equalsIgnoreCase("y")) {
-                    mainMenu();
-                } else {
-                    endProgram();
-                }
+                menuRecursion();
             }
         }
         if(!check) {
@@ -137,6 +141,16 @@ public class ContactsApp {
     }
     public static void endProgram() {
         System.out.println("Okay, Goodbye!");
+    }
+    public static void menuRecursion() throws IOException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Would you like to go back to the menu? [y/n]");
+        String userMenu = scan.nextLine();
+        if(userMenu.equalsIgnoreCase("y")) {
+            mainMenu();
+        } else if(userMenu.equalsIgnoreCase("n")) {
+            endProgram();
+        }
     }
 }
 
