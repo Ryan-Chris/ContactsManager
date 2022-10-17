@@ -40,7 +40,7 @@ public class ContactsApp {
         System.out.println("Phone Number: ");
         String userNumber = scan.nextLine();
 
-        Contacts contact = new Contacts(userFirst, userLast, userNumber);
+        Contacts contact = new Contacts(userFirst.stripLeading().stripTrailing(), userLast.stripLeading().stripTrailing(), userNumber.stripLeading().stripTrailing());
         contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
         Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
         contactList.add(contactFormat.toString());
