@@ -23,7 +23,7 @@ public class ContactsApp {
         }
     }
 
-    public ContactsApp() throws IOException {
+    public ContactsApp() {
     }
 
     public static void main(String[] args) throws IOException {
@@ -105,7 +105,7 @@ public class ContactsApp {
                 break;
         }
     }
-    public static void contactList() throws IOException {
+    public static void contactList() {
         for(int i = 0; i < contactList.size(); i += 1) {
             subContact.add(contactList.subList(i, Math.min(i + 1, contactList.size())));
             singleContacts = contactList.subList(i, Math.min(i + 1, contactList.size())).toString();
