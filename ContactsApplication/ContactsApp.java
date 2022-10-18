@@ -1,5 +1,6 @@
 package ContactsApplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +42,7 @@ public class ContactsApp {
         String userNumber = scan.nextLine();
 
         Contacts contact = new Contacts(userFirst.stripLeading().stripTrailing(), userLast.stripLeading().stripTrailing(), userNumber.stripLeading().stripTrailing());
-        contactFormat = Collections.singletonList(contact.getFirstName() + " " + contact.getLastName() + " | " + contact.getPhoneNumber());
+        contactFormat = Collections.singletonList("  " + contact.getFirstName() + " " + contact.getLastName() + "   " + "|" + "   " + contact.getPhoneNumber());
         Files.write(currentDir, contactFormat, StandardOpenOption.APPEND);
         contactList.add(contactFormat.toString());
         System.out.println("Contact was successfully added!");
@@ -106,9 +107,12 @@ public class ContactsApp {
         }
     }
     public static void contactList() {
+        System.out.println("     Name    |   Number   ");
+        System.out.println("``````````````````````````");
         for(int i = 0; i < contactList.size(); i += 1) {
             subContact.add(contactList.subList(i, Math.min(i + 1, contactList.size())));
             singleContacts = contactList.subList(i, Math.min(i + 1, contactList.size())).toString();
+//            System.out.printf("");
             System.out.println(singleContacts.replace("[", "").replace("]", ""));
         }
     }

@@ -1,2 +1,2 @@
-Jane Doe | 1234765
-John Doe | 1234876
+  Jane Doe   |   1234567
+  John Doe   |   7654321
